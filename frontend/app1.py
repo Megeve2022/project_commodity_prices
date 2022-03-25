@@ -6,8 +6,8 @@ import pandas as pd
 '''
 # Project Soy Bean Commodity Prediction Price
 '''
-df_fut_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/soybean_daily_price.csv")
-df_predc_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/predicted_soybean_prices.csv")
+df_fut_price = pd.read_csv("soybean_daily_price.csv")
+df_predc_price = pd.read_csv("predicted_soybean_prices.csv")
 
 
 st.write("This is inside the container")
