@@ -7,7 +7,7 @@ import pandas as pd
 # Project Soy Bean Commodity Prediction Price
 '''
 df_fut_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/soybean_daily_price.csv")
-
+df_predc_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/predicted_soybean_prices.csv")
 
 
 st.write("This is inside the container")
@@ -15,7 +15,9 @@ st.write("This is inside the container")
 fig = go.Figure()
     # You can call any Streamlit command, including custom components:
 fig.add_trace(
-go.Scatter(x=list(df_fut_price.Date), y=list(df_fut_price.Close)))
+go.Scatter(x=list(df_fut_price.Date), y=list(df_fut_price.Close), name= 'Real Price'))
+fig.add_trace(
+go.Scatter(x=list(df_predc_price['Date']), y=list(df_predc_price['Predicted Price']), name= 'Prediction Model'))
 
     # Set title
 fig.update_layout(
@@ -87,12 +89,12 @@ See ? No need to load a `model.joblib` file in this app, we do not even need to 
 🤔 How could we call our API ? Off course... The `requests` package 💡
 '''
 
-url = 'https://soybean-predict-price-project-ts7i4cg3ha-ew.a.run.app/predict'
+url = 'https://soybean-price-prediction-ts7i4cg3ha-ew.a.run.app/predict'
 
 resposta = requests.get(url).json()
 
 
-if url == 'https://soybean-predict-price-project-ts7i4cg3ha-ew.a.run.app/predict':
+if url == 'https://soybean-price-prediction-ts7i4cg3ha-ew.a.run.app/predict':
     for keys,values in resposta.items():
         st.markdown(f'{keys} : {round(values,2)}')
 
