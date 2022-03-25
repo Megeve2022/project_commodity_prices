@@ -25,14 +25,15 @@ def init_model():
     model.add(normalizer)
     model.add(layers.LSTM(30,input_shape=(252,5), return_sequences = False, activation='tanh'))
     model.add(layers.Dense(10, activation='relu'))
-    model.add(layers.Dense(12, activation='linear'))
+    model.add(layers.Dense(10, activation='relu'))
+    model.add(layers.Dense(23, activation='linear'))
 
     model.compile(loss='mse',
                   optimizer=opt,
                   metrics=[metric])
 
     es = EarlyStopping(monitor='val_loss', verbose=1, patience=10, restore_best_weights=True)
-    history = model.fit(X_train, y_train,validation_split=0.2,epochs=100, batch_size=1,callbacks=[es], verbose=1)
+    history = model.fit(X_train, y_train,validation_split=0.2,epochs=100, batch_size=8,callbacks=[es], verbose=1)
 
     return history,model
 
@@ -65,6 +66,6 @@ if __name__ == '__main__':
     history,model = init_model()
     # Show test metrics
     res = model.evaluate(X_test, y_test, verbose=0)
-    print(f'MAPE on the test set : {res[1]:.0f} %')
+    print(f'MAPE on the test set : {res[1]:.2f} %')
     # Save model to Google Cloud Platform
-    save_model_to_gcp(model)
+    # Save model to Google Cloud Platform save_model_to_gcp(model)

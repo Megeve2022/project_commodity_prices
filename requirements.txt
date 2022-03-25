@@ -25,6 +25,7 @@ mlflow
 s3fs
 uvicorn
 fastapi
+plotly
 
 
 
@@ -39,3 +40,4 @@ google
 termcolor
 streamlit
 requests
+datetime

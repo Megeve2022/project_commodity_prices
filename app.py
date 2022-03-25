@@ -1,9 +1,67 @@
 import streamlit as st
 import requests
+import plotly.graph_objects as go
+import pandas as pd
 
 '''
-# Project Commodity Prediction Price
+# Project Soy Bean Commodity Prediction Price
 '''
+df_fut_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/soybean_daily_price.csv")
+
+
+
+st.write("This is inside the container")
+
+fig = go.Figure()
+    # You can call any Streamlit command, including custom components:
+fig.add_trace(
+go.Scatter(x=list(df_fut_price.Date), y=list(df_fut_price.Close)))
+
+    # Set title
+fig.update_layout(
+    title_text="Historical Futures Prices for Soybeans"
+)
+
+fig.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                    label="1m",
+                    step="month",
+                    stepmode="backward"),
+                dict(count=6,
+                    label="6m",
+                    step="month",
+                    stepmode="backward"),
+                dict(count=1,
+                    label="YTD",
+                    step="year",
+                    stepmode="todate"),
+                dict(count=1,
+                    label="1y",
+                    step="year",
+                    stepmode="backward"),
+                dict(step="all")
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type="date"
+    )
+)
+
+st.plotly_chart(fig)
+
+
+
+
+
+
+
+
+
 
 st.markdown('''
 Este projeto possui como objetivo prever por meio de uso de redes neurais o preço da soja nos próximos 12 meses
