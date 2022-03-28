@@ -1,1 +1,7 @@
 streamlit
+re
+requests
+plotly
+pandas
+PIL
+datetime
