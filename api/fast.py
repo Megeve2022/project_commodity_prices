@@ -23,6 +23,14 @@ def index():
     return {"greeting": "Hello world"}
 
 
+@app.get("/csv")
+def index():
+    df_fut_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/soybean_daily_price.csv").to_dict()
+    df_predc_price = pd.read_csv("gs://commodity-price-storage/dataset_daily_prices_soybean/predicted_soybean_prices.csv").to_dict()
+
+    return [df_fut_price,df_predc_price]
+
+
 @app.get("/predict")
 def predict():
     # GET TODO: get model from GCP
