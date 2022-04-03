@@ -1,8 +1,8 @@
 # Data analysis
 - Document here the project: project_commodity_prices
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+- Description: Predict soybeans futures prices
+- Data Source: yfinance
+- Type of analysis: LSTM - RNN Predict model
 
 Please document the project the better you can.
 
